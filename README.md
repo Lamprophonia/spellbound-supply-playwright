@@ -1,35 +1,6 @@
 # Spellbound Supply Playwright Test Suite
 
-A portfolio test-automation project for [Spellbound Supply](https://spellbound.lamprophonia.com/), a controlled web application.
-
-The suite uses Node.js, Playwright Test, and TypeScript to demonstrate maintainable UI automation, cross-browser testing, and modern test architecture.
-
-## Project objectives
-
-- Build a professional Playwright test suite incrementally.
-- Apply maintainable test-automation patterns.
-- Use strict TypeScript checking.
-- Exercise Chromium, Firefox, and WebKit.
-- Keep tests isolated, readable, and suitable for continuous integration.
-- Expand into broader UI and API coverage as the application evolves.
-
-## Current coverage
-
-The initial smoke test verifies that the home page:
-
-- Loads with the expected document title.
-- Displays its primary heading.
-- Presents the expected heading content.
-
-The test runs against Chromium, Firefox, and WebKit.
-
-## Technology
-
-- Node.js
-- npm
-- TypeScript
-- Playwright Test
-- Playwright-managed Chromium, Firefox, and WebKit browsers
+Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprophonia.com/), built as a professional portfolio project with Playwright Test, TypeScript, and Node.js.
 
 ## Project structure
 
@@ -43,80 +14,51 @@ The test runs against Chromium, Firefox, and WebKit.
 │   └── tests/
 │       └── ui/
 │           └── home.spec.ts
+├── .prettierignore
+├── .prettierrc.json
+├── eslint.config.mjs
 ├── playwright.config.ts
 ├── tsconfig.json
 ├── package.json
 └── package-lock.json
 ```
 
-## Prerequisites
+## Milestones
 
-- Git
-- npm
-- A [Playwright-supported Node.js version](https://playwright.dev/docs/intro#system-requirements)
+- [x] **Milestone 1 — Playwright foundation**
+  - Strict TypeScript configuration
+  - Chromium, Firefox, and WebKit projects
+  - Page Object Model and externalized expected content
+  - Cross-browser home-page smoke test
+  - GitHub repository baseline
+- [x] **Milestone 2 — Automated code quality**
+  - ESLint for TypeScript and Playwright-specific rules
+  - Prettier for consistent formatting
+  - Reproducible npm validation commands
 
-Playwright currently supports the latest Node.js 22.x, 24.x, and 26.x releases.
+## Setup
 
-## Installation
-
-Install the dependencies recorded in `package-lock.json`:
+Use a [Playwright-supported Node.js version](https://playwright.dev/docs/intro#system-requirements), then install dependencies and browser binaries:
 
 ```shell
 npm ci
-```
-
-Install the project’s browser binaries:
-
-```shell
 npx playwright install chromium firefox webkit
 ```
 
-`npm ci` is intended for reproducible installation from the lockfile. Use `npm install` when deliberately adding or updating dependencies.
+## Commands
 
-## Running the tests
+| Command                | Purpose                                      |
+| ---------------------- | -------------------------------------------- |
+| `npm test`             | Run the full suite headlessly                |
+| `npm run test:headed`  | Run with visible browser windows             |
+| `npm run test:ui`      | Open Playwright UI Mode                      |
+| `npm run test:debug`   | Run with Playwright Inspector                |
+| `npm run test:report`  | Open the latest HTML report                  |
+| `npm run typecheck`    | Check TypeScript without emitting JavaScript |
+| `npm run lint`         | Run ESLint with warnings treated as failures |
+| `npm run lint:fix`     | Apply safe ESLint fixes                      |
+| `npm run format`       | Format supported files with Prettier         |
+| `npm run format:check` | Check formatting without changing files      |
+| `npm run quality`      | Run all static quality checks                |
 
-| Command | Purpose |
-| --- | --- |
-| `npm test` | Run the complete Playwright suite headlessly |
-| `npm run test:headed` | Run tests with visible browser windows |
-| `npm run test:ui` | Open Playwright UI Mode |
-| `npm run test:debug` | Run using Playwright Inspector |
-| `npm run test:report` | Open the most recently generated HTML report |
-| `npm run typecheck` | Check TypeScript without generating JavaScript |
-
-## Environment configuration
-
-The default system under test is configured in `playwright.config.ts`.
-
-Override it with the `BASE_URL` environment variable when testing another deployed environment.
-
-PowerShell example:
-
-```powershell
-$env:BASE_URL = 'https://spellbound.lamprophonia.com'
-npm test
-```
-
-## Design approach
-
-The project currently uses:
-
-- Page objects to encapsulate page locators and behavior.
-- Separate test-data modules for expected business content.
-- Accessibility-oriented locators such as `getByRole`.
-- Playwright web-first assertions with automatic retrying.
-- Strict TypeScript checks.
-- Isolated Playwright browser contexts.
-- Cross-browser projects.
-- Failure artifacts including screenshots, video, and traces.
-
-Additional abstractions will be introduced when they represent a clear, reusable responsibility.
-
-## Planned development
-
-- Expand home-page and navigation coverage.
-- Add product and shopping workflows.
-- Introduce reusable Playwright fixtures.
-- Add API-level tests where supported by the application.
-- Add linting and automated formatting.
-- Add continuous integration and publish test results.
+The suite uses `https://spellbound.lamprophonia.com` by default. Set the `BASE_URL` environment variable to target another environment.
