@@ -1,0 +1,25 @@
+# Node.js dependencies
+node_modules/
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Authentication state and secrets
+playwright/.auth/
+.env
+.env.*
+!.env.example
+
+# Build and coverage output
+dist/
+coverage/
+
+# Logs
+*.log
+
+# Operating-system files
+.DS_Store
+Thumbs.db

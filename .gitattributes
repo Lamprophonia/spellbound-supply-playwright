@@ -1,0 +1,6 @@
+# Keep repository text files consistent across operating systems.
+* text=auto eol=lf
+
+# Preserve Windows command scripts if introduced later.
+*.bat text eol=crlf
+*.cmd text eol=crlf
