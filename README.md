@@ -6,6 +6,9 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── src/
 │   ├── pages/
 │   │   └── home.page.ts
@@ -35,6 +38,11 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - ESLint for TypeScript and Playwright-specific rules
   - Prettier for consistent formatting
   - Reproducible npm validation commands
+- [ ] **Milestone 3 — GitHub Actions CI**
+  - Quality checks on pushes and pull requests
+  - Cross-browser Playwright execution on Linux
+  - Manual workflow runs
+  - Playwright report artifacts
 
 ## Setup
 
