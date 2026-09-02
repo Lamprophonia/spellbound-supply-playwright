@@ -19,6 +19,13 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   ├── test-data/
 │   │   ├── catalog-page.data.ts
 │   │   ├── home-page.data.ts
+│   │   ├── products/
+│   │   │   ├── implements.data.ts
+│   │   │   ├── ingredients.data.ts
+│   │   │   ├── potions.data.ts
+│   │   │   ├── product-categories.data.ts
+│   │   │   ├── product.types.ts
+│   │   │   └── tomes.data.ts
 │   │   └── products.data.ts
 │   └── tests/
 │       └── ui/
@@ -55,11 +62,20 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - Catalog and product page objects
   - Accessible navigation and user-visible assertions
   - Pull-request validation through CI
-- [ ] **Milestone 5 — Controlled defect detection**
-  - Isolated regression introduced in the SUT
-  - Failure diagnosis using Playwright artifacts
-  - Professional defect documentation and triage
-  - Fix verification with the same regression test
+- [x] **Milestone 5 — Scalable product data and expanded coverage**
+  - Product-category constants and category-specific data modules
+  - Unified product-data entry point for stable test imports
+  - Additional product navigation coverage using existing page objects
+  - Shared product-data contract enforced by TypeScript
+- [ ] **Milestone 6 — Data-driven catalog testing**
+  - Replace intentionally duplicated scenarios with test-case data
+  - Generate an independently reported Playwright test for each selected product
+  - Preserve readable product-specific test names and failure reporting
+- [ ] **Milestone 7 — Controlled defect detection and triage**
+  - Isolated, intentional defects represented by dedicated SUT products
+  - Failure diagnosis using Playwright reports and artifacts
+  - Structured GitHub defect reports with severity, priority, and evidence
+  - Known-defect annotations linked to open issues while assertions continue to test correct behavior
 
 ## Setup
 

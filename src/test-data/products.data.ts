@@ -1,7 +1,11 @@
+import { IMPLEMENTS } from './products/implements.data';
+import { INGREDIENTS } from './products/ingredients.data';
+import { POTIONS } from './products/potions.data';
+import { TOMES } from './products/tomes.data';
+
 export const PRODUCTS = {
-  commonHealingPotion: {
-    name: 'Common Healing Potion',
-    slug: 'common-healing-potion',
-    sku: 'SSC-POT-0001',
-  },
+  ...POTIONS,
+  ...INGREDIENTS,
+  ...TOMES,
+  ...IMPLEMENTS,
 } as const;
