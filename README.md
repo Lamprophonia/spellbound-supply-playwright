@@ -10,12 +10,19 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   └── workflows/
 │       └── ci.yml
 ├── src/
+│   ├── components/
+│   │   └── site-navigation.component.ts
 │   ├── pages/
-│   │   └── home.page.ts
+│   │   ├── catalog.page.ts
+│   │   ├── home.page.ts
+│   │   └── product.page.ts
 │   ├── test-data/
-│   │   └── home-page.data.ts
+│   │   ├── catalog-page.data.ts
+│   │   ├── home-page.data.ts
+│   │   └── products.data.ts
 │   └── tests/
 │       └── ui/
+│           ├── catalog-navigation.spec.ts
 │           └── home.spec.ts
 ├── .prettierignore
 ├── .prettierrc.json
@@ -38,11 +45,21 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - ESLint for TypeScript and Playwright-specific rules
   - Prettier for consistent formatting
   - Reproducible npm validation commands
-- [ ] **Milestone 3 — GitHub Actions CI**
+- [x] **Milestone 3 — GitHub Actions CI**
   - Quality checks on pushes and pull requests
   - Cross-browser Playwright execution on Linux
   - Manual workflow runs
   - Playwright report artifacts
+- [x] **Milestone 4 — Catalog navigation journey**
+  - Reusable site-navigation component
+  - Catalog and product page objects
+  - Accessible navigation and user-visible assertions
+  - Pull-request validation through CI
+- [ ] **Milestone 5 — Controlled defect detection**
+  - Isolated regression introduced in the SUT
+  - Failure diagnosis using Playwright artifacts
+  - Professional defect documentation and triage
+  - Fix verification with the same regression test
 
 ## Setup
 
