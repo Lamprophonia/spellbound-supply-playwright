@@ -17,9 +17,11 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   ├── home.page.ts
 │   │   └── product.page.ts
 │   ├── test-data/
+│   │   ├── catalog-navigation.data.ts
 │   │   ├── catalog-page.data.ts
 │   │   ├── home-page.data.ts
 │   │   ├── products/
+│   │   │   ├── README.md
 │   │   │   ├── implements.data.ts
 │   │   │   ├── ingredients.data.ts
 │   │   │   ├── potions.data.ts
@@ -67,7 +69,7 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - Unified product-data entry point for stable test imports
   - Additional product navigation coverage using existing page objects
   - Shared product-data contract enforced by TypeScript
-- [ ] **Milestone 6 — Data-driven catalog testing**
+- [x] **Milestone 6 — Data-driven catalog testing**
   - Replace intentionally duplicated scenarios with test-case data
   - Generate an independently reported Playwright test for each selected product
   - Preserve readable product-specific test names and failure reporting
