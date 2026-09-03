@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+
 import { HomePage } from '@pages/home.page';
 import { HOME_PAGE_CONTENT } from '@test-data/home-page.data';
 
