@@ -13,10 +13,12 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   ├── components/
 │   │   └── site-navigation.component.ts
 │   ├── pages/
+│   │   ├── cart.page.ts
 │   │   ├── catalog.page.ts
 │   │   ├── home.page.ts
 │   │   └── product.page.ts
 │   ├── test-data/
+│   │   ├── cart-page.data.ts
 │   │   ├── catalog-navigation.data.ts
 │   │   ├── catalog-page.data.ts
 │   │   ├── home-page.data.ts
@@ -31,6 +33,7 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   └── products.data.ts
 │   └── tests/
 │       └── ui/
+│           ├── cart.spec.ts
 │           ├── catalog-navigation.spec.ts
 │           └── home.spec.ts
 ├── .prettierignore
@@ -74,10 +77,13 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - Generate an independently reported Playwright test for each selected product
   - Preserve readable product-specific test names and failure reporting
 - [ ] **Milestone 7 — Controlled defect detection and triage**
-  - Isolated, intentional defects represented by dedicated SUT products
-  - Failure diagnosis using Playwright reports and artifacts
-  - Structured GitHub defect reports with severity, priority, and evidence
-  - Known-defect annotations linked to open issues while assertions continue to test correct behavior
+  - [x] Cart page object with product-scoped quantity and price locators
+  - [x] Common Healing Potion passing control: add to cart, verify unit price, update quantity, and verify line total
+  - [x] Local cross-browser baseline: 12 passing executions
+  - [ ] Automated detection of intentional defects represented by dedicated SUT products
+  - [ ] Failure diagnosis using Playwright reports and artifacts
+  - [ ] Structured GitHub defect reports with severity, priority, and evidence
+  - [ ] Known-defect annotations linked to open issues while assertions continue to test correct behavior
 
 ## Setup
 

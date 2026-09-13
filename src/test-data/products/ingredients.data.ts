@@ -11,7 +11,7 @@ export const INGREDIENTS = {
       amount: 12,
       currency: 'Copper',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'packet',
     },

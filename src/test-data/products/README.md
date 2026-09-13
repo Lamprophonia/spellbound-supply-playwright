@@ -14,7 +14,7 @@ product fixture does not automatically add it to every test.
 ## Adding a product
 
 1. Add the fixture to the appropriate category file.
-2. Use the exact name, slug, SKU, price, currency, weight, and unit from
+2. Use the exact name, slug, SKU, price, currency, and purchase unit from
    the expected product contract.
 3. Add a new category and update `../products.data.ts` only when the
    existing categories are not appropriate.

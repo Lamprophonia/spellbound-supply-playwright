@@ -18,4 +18,15 @@ export class ProductPage {
   async goto(productSlug: string): Promise<void> {
     await this.page.goto(`/products/${productSlug}`);
   }
+
+  addToCartButton(unit: string): Locator {
+    return this.page.getByRole('button', {
+      name: `Add 1 ${unit} to cart`,
+      exact: true,
+    });
+  }
+
+  async addOneToCart(unit: string): Promise<void> {
+    await this.addToCartButton(unit).click();
+  }
 }
