@@ -11,7 +11,7 @@ export const TOMES = {
       amount: 9,
       currency: 'Silver',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'copy',
     },

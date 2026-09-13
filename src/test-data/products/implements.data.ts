@@ -11,7 +11,7 @@ export const IMPLEMENTS = {
       amount: 10,
       currency: 'Silver',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'wand',
     },

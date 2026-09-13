@@ -5,7 +5,7 @@ export interface ProductPrice {
   readonly currency: string;
 }
 
-export interface ProductWeight {
+export interface ProductPurchaseUnit {
   readonly amount: number;
   readonly unit: string;
 }
@@ -16,5 +16,5 @@ export interface Product {
   readonly sku: string;
   readonly category: ProductCategory;
   readonly price: ProductPrice;
-  readonly weight: ProductWeight;
+  readonly purchaseUnit: ProductPurchaseUnit;
 }

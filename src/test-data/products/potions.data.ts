@@ -11,7 +11,7 @@ export const POTIONS = {
       amount: 5,
       currency: 'Copper',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'ounce',
     },
@@ -26,7 +26,7 @@ export const POTIONS = {
       amount: 15,
       currency: 'Copper',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'ounce',
     },
@@ -41,7 +41,7 @@ export const POTIONS = {
       amount: 8,
       currency: 'Copper',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'ounce',
     },
@@ -56,7 +56,7 @@ export const POTIONS = {
       amount: 3,
       currency: 'Silver',
     },
-    weight: {
+    purchaseUnit: {
       amount: 1,
       unit: 'vial',
     },
