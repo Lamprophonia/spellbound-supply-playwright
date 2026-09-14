@@ -25,9 +25,11 @@ test.describe('Cart pricing', () => {
       );
       await expect(cartPage.productRow(product.name)).toBeVisible();
       await expect(cartPage.quantityInput(product.name)).toHaveValue('1');
-      await expect(cartPage.unitPrice(product.name)).toHaveText(
-        `${product.price.amount} ${product.price.currency} per ${product.purchaseUnit.unit}`,
-      );
+      await expect
+        .soft(cartPage.unitPrice(product.name))
+        .toHaveText(
+          `${product.price.amount} ${product.price.currency} per ${product.purchaseUnit.unit}`,
+        );
       await expect(cartPage.lineTotal(product.name)).toHaveText(
         `${product.price.amount} ${product.price.currency}`,
       );
@@ -43,5 +45,42 @@ test.describe('Cart pricing', () => {
         `${product.price.amount * updatedQuantity} ${product.price.currency}`,
       );
     });
+  });
+
+  test('Nine-Tooth Processed Mandrake Root uses the correct cart unit price', async ({
+    page,
+  }) => {
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
+    const product = PRODUCTS.nineToothProcessedMandrakeRoot;
+
+    await productPage.goto(product.slug);
+    await productPage.addOneToCart(product.purchaseUnit.unit);
+    await cartPage.goto();
+
+    await expect(cartPage.productRow(product.name)).toBeVisible();
+    await expect(cartPage.quantityInput(product.name)).toHaveValue('1');
+
+    // This adds a structured note to the test results, because we want this to fail for demonstration purposes
+    test.info().annotations.push({
+      type: 'issue',
+      description:
+        'https://github.com/Lamprophonia/spellbound-supply-playwright/issues/6',
+    });
+
+    // This tells the playwright that beyond this point, the test is expected to fail.
+    test.fail(
+      true,
+      'Known defect #6: Mandrake cart pricing uses 13 instead of 12 Copper',
+    );
+
+    await expect
+      .soft(cartPage.unitPrice(product.name))
+      .toHaveText(
+        `${product.price.amount} ${product.price.currency} per ${product.purchaseUnit.unit}`,
+      );
+    await expect
+      .soft(cartPage.lineTotal(product.name))
+      .toHaveText(`${product.price.amount} ${product.price.currency}`);
   });
 });

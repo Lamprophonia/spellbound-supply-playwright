@@ -80,10 +80,30 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - [x] Cart page object with product-scoped quantity and price locators
   - [x] Common Healing Potion passing control: add to cart, verify unit price, update quantity, and verify line total
   - [x] Local cross-browser baseline: 12 passing executions
-  - [ ] Automated detection of intentional defects represented by dedicated SUT products
-  - [ ] Failure diagnosis using Playwright reports and artifacts
-  - [ ] Structured GitHub defect reports with severity, priority, and evidence
-  - [ ] Known-defect annotations linked to open issues while assertions continue to test correct behavior
+  - [x] Mandrake unit-price and line-total defect reproduced in Chromium, Firefox, and WebKit
+  - [x] Failure diagnosis using Playwright reports and artifacts
+  - [x] Defect documented and triaged in [issue #6](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/6)
+  - [x] Known-defect annotation with unchanged correct-price expectations
+  - [ ] Pull-request CI validation of expected-failure handling
+
+## Controlled defect demonstration
+
+Nine-Tooth Processed Mandrake Root intentionally shows 13 Copper per packet
+and a 13 Copper line total at quantity one in the cart; the expected price
+is 12 Copper. Issue #6 is tracked in this automation repository to keep the
+portfolio evidence and triage together. The SUT defect is retained for demonstration.
+
+The test verifies the product row and quantity with hard assertions before
+calling `test.fail()`. Soft assertions then collect both price discrepancies,
+and an issue annotation connects the test result to the defect report.
+Failures before the expected-failure declaration remain unexpected. An
+unexpected pass requires review; failures afterward still require inspection
+because `test.fail()` does not verify their cause.
+
+Local validation: **15 executions — 12 normal passes and 3 expected failures**.
+The overall run succeeds, and the console summary may display `15 passed`;
+this does not mean the SUT defect is fixed. Common Healing Potion remains
+the passing cart control. PR validation is pending.
 
 ## Setup
 
