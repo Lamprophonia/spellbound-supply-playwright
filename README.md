@@ -7,6 +7,9 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 ```text
 .
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   └── bug_report.yml
+│   ├── pull_request_template.md
 │   └── workflows/
 │       └── ci.yml
 ├── src/
@@ -76,7 +79,7 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - Replace intentionally duplicated scenarios with test-case data
   - Generate an independently reported Playwright test for each selected product
   - Preserve readable product-specific test names and failure reporting
-- [ ] **Milestone 7 — Controlled defect detection and triage**
+- [x] **Milestone 7 — Controlled defect detection and triage**
   - [x] Cart page object with product-scoped quantity and price locators
   - [x] Common Healing Potion passing control: add to cart, verify unit price, update quantity, and verify line total
   - [x] Local cross-browser baseline: 12 passing executions
@@ -84,7 +87,13 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - [x] Failure diagnosis using Playwright reports and artifacts
   - [x] Defect documented and triaged in [issue #6](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/6)
   - [x] Known-defect annotation with unchanged correct-price expectations
-  - [ ] Pull-request CI validation of expected-failure handling
+  - [x] Pull-request CI validation of expected-failure handling
+- [ ] **Milestone 8 — Repository safeguards and contribution workflow**
+  - [x] Default-branch ruleset configured in GitHub settings
+  - [x] Structured bug-report form and pull-request description template
+  - [ ] Verify required CI checks block merging while pending
+  - [ ] Verify merging is available after required checks pass
+  - [ ] Verify issue-form rendering and PR-template prefilling after merge
 
 ## Controlled defect demonstration
 
@@ -103,7 +112,8 @@ because `test.fail()` does not verify their cause.
 Local validation: **15 executions — 12 normal passes and 3 expected failures**.
 The overall run succeeds, and the console summary may display `15 passed`;
 this does not mean the SUT defect is fixed. Common Healing Potion remains
-the passing cart control. PR validation is pending.
+the passing cart control. Expected-failure handling and report annotations
+were also verified in pull-request CI.
 
 ## Setup
 

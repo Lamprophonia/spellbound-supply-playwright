@@ -1,0 +1,77 @@
+name: Bug report
+description: Report a SUT or test-automation defect.
+title: '[Bug] '
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - SUT
+        - Test automation
+        - CI or repository tooling
+        - Unsure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: controlled-defect
+    attributes:
+      label: Is this an intentional demonstration defect?
+      options:
+        - 'No'
+        - 'Yes'
+        - Unsure
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include URL, OS, tested browsers, and relevant versions or commits. Distinguish verified scope from suspected scope.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include starting state, product or test data, numbered steps, and reproduction frequency.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe the correct behavior and the requirement or fixture supporting it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Explain the affected user behavior. For demonstrations, distinguish simulated impact from actual impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Attach screenshots or provide assertion errors, report links, and CI runs. Remove sensitive information.
+
+  - type: textarea
+    id: related-issues
+    attributes:
+      label: Related issues
+      description: Search open and closed issues first. Link any related reports or explain how this differs.
