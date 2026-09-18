@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { CartPage } from '@pages/cart.page';
 import { ProductPage } from '@pages/product.page';
-import { CART_PAGE_CONTENT } from '@test-data/cart-page.data';
+import { CART_PAGE_CONTENT } from '@test-data/cart/cart-page.data';
 import { PRODUCTS } from '@test-data/products.data';
 
 test.describe('Cart pricing', () => {
