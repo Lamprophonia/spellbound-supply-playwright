@@ -14,6 +14,7 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │       └── ci.yml
 ├── src/
 │   ├── components/
+│   │   ├── site-header.component.ts
 │   │   └── site-navigation.component.ts
 │   ├── pages/
 │   │   ├── cart.page.ts
@@ -21,7 +22,9 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   ├── home.page.ts
 │   │   └── product.page.ts
 │   ├── test-data/
-│   │   ├── cart-page.data.ts
+│   │   ├── cart/
+│   │   │   ├── cart-management.data.ts
+│   │   │   └── cart-page.data.ts
 │   │   ├── catalog-navigation.data.ts
 │   │   ├── catalog-page.data.ts
 │   │   ├── home-page.data.ts
@@ -36,9 +39,14 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   └── products.data.ts
 │   └── tests/
 │       └── ui/
-│           ├── cart.spec.ts
-│           ├── catalog-navigation.spec.ts
-│           └── home.spec.ts
+│           ├── cart/
+│           │   ├── cart-empty-state.spec.ts
+│           │   ├── cart-management.spec.ts
+│           │   └── cart-pricing.spec.ts
+│           ├── catalog/
+│           │   └── catalog-navigation.spec.ts
+│           └── home/
+│               └── home.spec.ts
 ├── .prettierignore
 ├── .prettierrc.json
 ├── eslint.config.mjs
@@ -91,9 +99,26 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 - [ ] **Milestone 8 — Repository safeguards and contribution workflow**
   - [x] Default-branch ruleset configured in GitHub settings
   - [x] Structured bug-report form and pull-request description template
-  - [ ] Verify required CI checks block merging while pending
-  - [ ] Verify merging is available after required checks pass
-  - [ ] Verify issue-form rendering and PR-template prefilling after merge
+  - [x] Verify required CI checks block merging while pending
+  - [x] Verify merging is available after required checks pass
+  - [x] Verify issue-form rendering after merge
+  - [ ] Verify PR-template prefilling on the next PR
+- [ ] **Milestone 9 — Cart state and isolation**
+  - [x] Feature-based spec folders and cart-specific scenario data
+  - [x] Fresh-context empty state and navigation back to the catalog
+  - [x] Independent removal, clear-cart, and quantity-counter scenarios
+  - [x] Shared header component with visible and accessible counter checks
+  - [ ] Full-suite cross-browser validation and PR CI verification
+- [ ] **Milestone 10 — Reusable cart setup**
+  - Extract repeated product-addition setup into a shared helper
+  - Preserve independent scenarios, explicit assertions, and readable report steps
+- [ ] **Milestone 11 — Catalog search and filtering** (planned)
+- [ ] **Milestone 12 — Network failures and recovery** (planned)
+- [ ] **Milestone 13 — Accessibility checks and keyboard journeys** (planned)
+
+Specs are grouped by feature, then by behavior: empty state, pricing, and
+cart management. Each test establishes its own starting state. Repeated cart
+setup is intentional until Milestone 10 demonstrates the refactor.
 
 ## Controlled defect demonstration
 
@@ -109,7 +134,7 @@ Failures before the expected-failure declaration remain unexpected. An
 unexpected pass requires review; failures afterward still require inspection
 because `test.fail()` does not verify their cause.
 
-Local validation: **15 executions — 12 normal passes and 3 expected failures**.
+Milestone 7 validation: **15 executions — 12 normal passes and 3 expected failures**.
 The overall run succeeds, and the console summary may display `15 passed`;
 this does not mean the SUT defect is fixed. Common Healing Potion remains
 the passing cart control. Expected-failure handling and report annotations
