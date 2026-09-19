@@ -12,6 +12,7 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
+      "@workflows/*": ["./src/workflows/*"],
       "@test-data/*": ["./src/test-data/*"]
     }
   },

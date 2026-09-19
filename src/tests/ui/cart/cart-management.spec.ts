@@ -7,6 +7,7 @@ import {
   CART_COUNTER_SCENARIO,
   CART_REMOVAL_SCENARIO,
 } from '@test-data/cart/cart-management.data';
+import { populateCart } from '@workflows/cart.workflow';
 
 test.describe('Cart management', () => {
   test('removing one product preserves the other product', async ({ page }) => {
@@ -15,13 +16,10 @@ test.describe('Cart management', () => {
     const { productToRemove, productToKeep } = CART_REMOVAL_SCENARIO;
 
     await test.step('Add two different products', async () => {
-      await productPage.goto(productToRemove.slug);
-      await productPage.addOneToCart(productToRemove.purchaseUnit.unit);
-
-      await productPage.goto(productToKeep.slug);
-      await productPage.addOneToCart(productToKeep.purchaseUnit.unit);
-
-      await cartPage.goto();
+      await populateCart(productPage, cartPage, [
+        productToRemove,
+        productToKeep,
+      ]);
 
       await expect(cartPage.productRow(productToRemove.name)).toBeVisible();
       await expect(cartPage.quantityInput(productToRemove.name)).toHaveValue(
@@ -49,13 +47,7 @@ test.describe('Cart management', () => {
     const { firstProduct, secondProduct } = CART_CLEAR_SCENARIO;
 
     await test.step('Populate the cart with two products', async () => {
-      await productPage.goto(firstProduct.slug);
-      await productPage.addOneToCart(firstProduct.purchaseUnit.unit);
-
-      await productPage.goto(secondProduct.slug);
-      await productPage.addOneToCart(secondProduct.purchaseUnit.unit);
-
-      await cartPage.goto();
+      await populateCart(productPage, cartPage, [firstProduct, secondProduct]);
 
       await expect(cartPage.productRow(firstProduct.name)).toBeVisible();
       await expect(cartPage.productRow(secondProduct.name)).toBeVisible();
@@ -87,13 +79,7 @@ test.describe('Cart management', () => {
     } = CART_COUNTER_SCENARIO;
 
     await test.step('Add two different products', async () => {
-      await productPage.goto(firstProduct.slug);
-      await productPage.addOneToCart(firstProduct.purchaseUnit.unit);
-
-      await productPage.goto(secondProduct.slug);
-      await productPage.addOneToCart(secondProduct.purchaseUnit.unit);
-
-      await cartPage.goto();
+      await populateCart(productPage, cartPage, [firstProduct, secondProduct]);
 
       await expect(cartPage.productRow(firstProduct.name)).toBeVisible();
       await expect(cartPage.quantityInput(firstProduct.name)).toHaveValue('1');
