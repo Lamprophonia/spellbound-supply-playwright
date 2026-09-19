@@ -37,6 +37,8 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   │   ├── product.types.ts
 │   │   │   └── tomes.data.ts
 │   │   └── products.data.ts
+│   ├── workflows/
+│   │   └── cart.workflow.ts
 │   └── tests/
 │       └── ui/
 │           ├── cart/
@@ -96,29 +98,37 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - [x] Defect documented and triaged in [issue #6](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/6)
   - [x] Known-defect annotation with unchanged correct-price expectations
   - [x] Pull-request CI validation of expected-failure handling
-- [ ] **Milestone 8 — Repository safeguards and contribution workflow**
+- [x] **Milestone 8 — Repository safeguards and contribution workflow**
   - [x] Default-branch ruleset configured in GitHub settings
   - [x] Structured bug-report form and pull-request description template
   - [x] Verify required CI checks block merging while pending
   - [x] Verify merging is available after required checks pass
   - [x] Verify issue-form rendering after merge
-  - [ ] Verify PR-template prefilling on the next PR
-- [ ] **Milestone 9 — Cart state and isolation**
+  - [x] Verify PR-template prefilling on the next PR
+- [x] **Milestone 9 — Cart state and isolation**
   - [x] Feature-based spec folders and cart-specific scenario data
   - [x] Fresh-context empty state and navigation back to the catalog
   - [x] Independent removal, clear-cart, and quantity-counter scenarios
   - [x] Shared header component with visible and accessible counter checks
-  - [ ] Full-suite cross-browser validation and PR CI verification
+  - [x] Full-suite cross-browser validation and PR CI verification
 - [ ] **Milestone 10 — Reusable cart setup**
-  - Extract repeated product-addition setup into a shared helper
-  - Preserve independent scenarios, explicit assertions, and readable report steps
+  - [x] Extract repeated product-addition setup into a shared cart workflow
+  - [x] Preserve independent scenarios, explicit assertions, and readable report steps
+  - [x] Local cross-browser validation: 27 normal passes and 3 expected failures
+  - [ ] Pull-request CI verification
 - [ ] **Milestone 11 — Catalog search and filtering** (planned)
 - [ ] **Milestone 12 — Network failures and recovery** (planned)
 - [ ] **Milestone 13 — Accessibility checks and keyboard journeys** (planned)
 
 Specs are grouped by feature, then by behavior: empty state, pricing, and
-cart management. Each test establishes its own starting state. Repeated cart
-setup is intentional until Milestone 10 demonstrates the refactor.
+cart management. Each test establishes its own starting state. Page objects and
+components own UI interactions; workflows coordinate reusable action sequences;
+tests select scenario data and assert outcomes.
+
+The shared `populateCart` workflow adds one purchase unit of each supplied product
+to the existing cart, then opens the cart. It uses page objects sharing the same
+browser page and does not clear the cart or assert outcomes. The three cart-management
+tests reuse it while retaining their own assertions and report steps.
 
 ## Controlled defect demonstration
 
