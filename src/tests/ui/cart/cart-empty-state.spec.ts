@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { CartPage } from '@pages/cart.page';
 import { CART_PAGE_CONTENT } from '@test-data/cart/cart-page.data';
-import { CATALOG_PAGE_CONTENT } from '@test-data/catalog-page.data';
+import { CATALOG_PAGE_CONTENT } from '@test-data/catalog/catalog-page.data';
 import { CatalogPage } from '@pages/catalog.page';
 
 test.describe('Cart empty state', () => {
