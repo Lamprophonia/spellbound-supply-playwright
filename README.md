@@ -2,13 +2,37 @@
 
 UI and API test automation for [Spellbound Supply](https://spellbound.lamprophonia.com/), built as a professional portfolio project with Playwright Test, TypeScript, Node.js, and Postman.
 
+## Project tracking and contribution workflow
+
+The public [Spellbound QA Engineering project board](https://github.com/users/Lamprophonia/projects/2)
+tracks planned work, delivery, and deferred defects. This README retains the
+milestone overview; issues define individual tasks, and PRs provide implementation
+and validation evidence.
+
+Milestones 1–10 and their delivery associations were added retrospectively. They
+document completed work, not planning performed at the time. Milestone 11 marks
+the transition to the task-first workflow below; project setup itself is tracked
+in [issue #11](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/11).
+
+1. Create a task issue with an objective, scope, acceptance criteria, and validation plan before starting new work. Use the bug-report form for defects.
+2. Assign an owner and milestone, confirm project membership, and set priority and sizing as appropriate. Move scoped work from Backlog to Ready, then In progress when work begins.
+3. Create a branch from current `main` with the issue number, such as `test/14-catalog-api` or `chore/11-project-tracking`.
+4. Open a PR referencing the task, with a title such as `[#14] Add catalog API coverage`. Associate it with the project and milestone, summarize changes and validation, and move it to In review. Individual commits use descriptive prefixes such as `test:`, `docs:`, or `refactor:`; this is a convention, not automated enforcement.
+5. Review the diff, quality checks, relevant tests, and CI evidence before squash merging. Record any expected failures explicitly rather than treating them as fixed defects.
+6. Confirm the issue's acceptance criteria and record completion evidence before deliberately closing it. Use `Refs #14` when linking a PR without requesting automatic issue closure. Close a milestone only when its agreed scope is complete.
+
+Open repository issues and PRs are automatically added to the board. Merged PRs
+are reflected as Done; moving an issue to Done does not itself close it. Retained
+demonstration defects remain open and Deferred, with their rationale documented.
+
 ## Project structure
 
 ```text
 .
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
-│   │   └── bug_report.yml
+│   │   ├── bug_report.yml
+│   │   └── task.yml
 │   ├── pull_request_template.md
 │   └── workflows/
 │       └── ci.yml

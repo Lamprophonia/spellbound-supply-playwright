@@ -1,0 +1,48 @@
+name: Task
+description: Plan a scoped change with acceptance criteria and validation.
+title: '[Task] '
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What should this work achieve, and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Identify what is included and any explicit exclusions.
+      value: |
+        In scope:
+        -
+
+        Out of scope:
+        -
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define observable outcomes required to consider this task complete.
+      placeholder: |
+        - [ ] First required outcome
+        - [ ] Second required outcome
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: How will completion be verified? Include relevant checks and evidence.
+      placeholder: |
+        - Automated tests or quality checks:
+        - Manual verification:
+        - Evidence to attach or link:
+    validations:
+      required: true
