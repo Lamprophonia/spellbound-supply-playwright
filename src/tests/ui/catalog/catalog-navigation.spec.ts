@@ -3,8 +3,9 @@ import { expect, test } from '@playwright/test';
 import { CatalogPage } from '@pages/catalog.page';
 import { HomePage } from '@pages/home.page';
 import { ProductPage } from '@pages/product.page';
-import { CATALOG_PAGE_CONTENT } from '@test-data/catalog-page.data';
-import { CATALOG_NAVIGATION_PRODUCTS } from '@test-data/catalog-navigation.data';
+import { CATALOG_PAGE_CONTENT } from '@test-data/catalog/catalog-page.data';
+import { CATALOG_NAVIGATION_PRODUCTS } from '@test-data/catalog/catalog-navigation.data';
+import { HOME_PAGE_CONTENT } from '@test-data/home-page.data';
 
 test.describe('Catalog navigation', () => {
   for (const product of CATALOG_NAVIGATION_PRODUCTS) {
@@ -36,4 +37,19 @@ test.describe('Catalog navigation', () => {
       });
     });
   }
+});
+
+test.describe('Brand-link Navigation', () => {
+  test('Navigate to home from the header brand-link', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    const homePage = new HomePage(page);
+
+    await catalogPage.goto();
+    await catalogPage.header.openHome();
+
+    await expect(page).toHaveURL('/');
+    await expect(homePage.mainHeading).toHaveText(
+      HOME_PAGE_CONTENT.mainHeading,
+    );
+  });
 });

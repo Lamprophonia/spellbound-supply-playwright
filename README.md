@@ -25,8 +25,10 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   ├── cart/
 │   │   │   ├── cart-management.data.ts
 │   │   │   └── cart-page.data.ts
-│   │   ├── catalog-navigation.data.ts
-│   │   ├── catalog-page.data.ts
+│   │   ├── catalog/
+│   │   │   ├── catalog-navigation.data.ts
+│   │   │   ├── catalog-page.data.ts
+│   │   │   └── catalog-search.data.ts
 │   │   ├── home-page.data.ts
 │   │   ├── products/
 │   │   │   ├── README.md
@@ -46,7 +48,8 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │           │   ├── cart-management.spec.ts
 │           │   └── cart-pricing.spec.ts
 │           ├── catalog/
-│           │   └── catalog-navigation.spec.ts
+│           │   ├── catalog-navigation.spec.ts
+│           │   └── catalog-search.spec.ts
 │           └── home/
 │               └── home.spec.ts
 ├── .prettierignore
@@ -111,14 +114,24 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - [x] Independent removal, clear-cart, and quantity-counter scenarios
   - [x] Shared header component with visible and accessible counter checks
   - [x] Full-suite cross-browser validation and PR CI verification
-- [ ] **Milestone 10 — Reusable cart setup**
+- [x] **Milestone 10 — Reusable cart setup**
   - [x] Extract repeated product-addition setup into a shared cart workflow
   - [x] Preserve independent scenarios, explicit assertions, and readable report steps
   - [x] Local cross-browser validation: 27 normal passes and 3 expected failures
-  - [ ] Pull-request CI verification
-- [ ] **Milestone 11 — Catalog search and filtering** (planned)
-- [ ] **Milestone 12 — Network failures and recovery** (planned)
-- [ ] **Milestone 13 — Accessibility checks and keyboard journeys** (planned)
+  - [x] Pull-request CI verification
+- [ ] **Milestone 11 — Catalog search and query synchronization**
+  - [x] Shared header search and brand-link navigation actions
+  - [x] Brand-link navigation from catalog to home
+  - [x] Initial search validates URL query, header input, result count, and product identity
+  - [x] Repeated-search regression verifies sidebar synchronization after the SUT fix for [issue #12](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/12)
+  - [x] Catalog-specific test-data folder and independent search scenarios
+  - [x] Local quality checks and cross-browser validation
+  - [ ] Pull-request CI verification and merge
+  - Scope narrowed to prioritize API testing; no-results and filter application/clearing coverage deferred to follow-up work
+- [ ] **Milestone 12 — API testing fundamentals** (next)
+- [ ] **Milestone 13 — Network failures and recovery** (planned)
+- [ ] **Milestone 14 — Accessibility checks and keyboard journeys** (planned)
+- [ ] **Milestone 15 — Performance fundamentals** (planned)
 
 Specs are grouped by feature, then by behavior: empty state, pricing, and
 cart management. Each test establishes its own starting state. Page objects and
@@ -149,6 +162,17 @@ The overall run succeeds, and the console summary may display `15 passed`;
 this does not mean the SUT defect is fixed. Common Healing Potion remains
 the passing cart control. Expected-failure handling and report annotations
 were also verified in pull-request CI.
+
+## Fixed-defect regression coverage
+
+Repeated header searches exposed a stale sidebar input: the URL and results
+updated while the sidebar retained the previous query. Unlike the intentional
+Mandrake defect, this was discovered through exploratory testing and recorded in
+[issue #12](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/12).
+
+The same Playwright test reproduced the mismatch in all three browsers, then
+passed unchanged after the SUT fix was deployed. It remains a normal passing
+regression test; issue #12 is closed following manual and automated verification.
 
 ## Setup
 
