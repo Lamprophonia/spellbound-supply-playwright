@@ -1,0 +1,139 @@
+{
+  "info": {
+    "_postman_id": "8924ee5a-9f5a-495d-b1fa-96b32f65b18d",
+    "name": "Spellbound Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39686549",
+    "_collection_link": "https://go.postman.co/collection/39686549-8924ee5a-9f5a-495d-b1fa-96b32f65b18d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Find Common Healing Potion by SKU",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', () => {\r\n  pm.response.to.have.status(200);\r\n});\r\n\r\npm.test('Returns Common Healing Potion at the expected price', () => {\r\n  const body = pm.response.json();\r\n\r\n  pm.expect(body.schemaVersion).to.equal(1);\r\n  pm.expect(body.products).to.be.an('array').with.lengthOf(1);\r\n  pm.expect(body.total).to.equal(body.products.length);\r\n\r\n  const product = body.products[0];\r\n\r\n  pm.expect(product.sku).to.equal('SSC-POT-0001');\r\n  pm.expect(product.name).to.equal('Common Healing Potion');\r\n  pm.expect(product.price).to.deep.equal({\r\n    amount: 5,\r\n    denomination: 'Copper',\r\n    unit: 'ounce',\r\n  });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?q=SSC-POT-0001",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            {
+              "key": "q",
+              "value": "SSC-POT-0001"
+            }
+          ]
+        },
+        "description": "## Purpose\n\nFind Common Healing Potion by its SKU using the catalog search endpoint.\n\n## Request\n\nGET {{baseUrl}}/api/products?q=SSC-POT-0001\n\nThe `q` parameter searches the catalog. Because `status` is omitted,  \nthe API defaults to canonical products.\n\n## Expected response\n\n- HTTP 200.\n    \n- Schema version 1.\n    \n- Exactly one product: Common Healing Potion, SKU SSC-POT-0001.\n    \n- Price: 5 Copper per ounce.\n    \n- `total` equals 1 and matches the number of returned products.\n    \n\n## Environment\n\nSelect Spellbound Local to run against the local API."
+      },
+      "response": []
+    },
+    {
+      "name": "Search with no matching products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', () => {\r\n  pm.response.to.have.status(200);\r\n});\r\n\r\npm.test('Returns an empty result set', () => {\r\n  const body = pm.response.json();\r\n\r\n  pm.expect(body.schemaVersion).to.equal(1);\r\n  pm.expect(body.products).to.be.an('array').that.is.empty;\r\n  pm.expect(body.total).to.equal(0);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?q=qa-no-match-7f93c2",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            {
+              "key": "q",
+              "value": "qa-no-match-7f93c2"
+            }
+          ]
+        },
+        "description": "Verify that a valid search with no matching products returns HTTP 200,  \nan empty products array, and total 0—not a validation error."
+      },
+      "response": []
+    },
+    {
+      "name": "Reject an invalid status filter",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 400', () => {\r\n  pm.response.to.have.status(400);\r\n});\r\n\r\npm.test('Identifies the invalid status parameter', () => {\r\n  const body = pm.response.json();\r\n\r\n  pm.expect(body.error.code).to.equal('INVALID_QUERY_PARAMETER');\r\n  pm.expect(body.error.parameter).to.equal('status');\r\n  pm.expect(body.error.message).to.be.a('string').and.not.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?status=invalid",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            {
+              "key": "status",
+              "value": "invalid"
+            }
+          ]
+        },
+        "description": "Verify that an unsupported status value returns HTTP 400 and identifies  \nstatus as the invalid parameter using a stable error code."
+      },
+      "response": []
+    },
+    {
+      "name": "Exclude a matching product from a different department",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', () => {\r\n  pm.response.to.have.status(200);\r\n});\r\n\r\npm.test('Excludes products that do not match both filters', () => {\r\n  const body = pm.response.json();\r\n\r\n  pm.expect(body.schemaVersion).to.equal(1);\r\n  pm.expect(body.products).to.be.an('array').that.is.empty;\r\n  pm.expect(body.total).to.equal(0);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?q=SSC-POT-0001&departmentId=ingredients-reagents",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            {
+              "key": "q",
+              "value": "SSC-POT-0001"
+            },
+            {
+              "key": "departmentId",
+              "value": "ingredients-reagents"
+            }
+          ]
+        },
+        "description": "Verify that search and department filters combine using AND.  \nCommon Healing Potion matches the SKU query but not the selected  \ningredients department, so the response must contain no products."
+      },
+      "response": []
+    }
+  ]
+}

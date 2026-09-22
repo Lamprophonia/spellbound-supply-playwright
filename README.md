@@ -1,6 +1,6 @@
 # Spellbound Supply Playwright Test Suite
 
-Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprophonia.com/), built as a professional portfolio project with Playwright Test, TypeScript, and Node.js.
+UI and API test automation for [Spellbound Supply](https://spellbound.lamprophonia.com/), built as a professional portfolio project with Playwright Test, TypeScript, Node.js, and Postman.
 
 ## Project structure
 
@@ -12,6 +12,9 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   ├── pull_request_template.md
 │   └── workflows/
 │       └── ci.yml
+├── postman/
+│   └── collections/
+│       └── spellbound-catalog-api.postman_collection.json
 ├── src/
 │   ├── components/
 │   │   ├── site-header.component.ts
@@ -22,6 +25,8 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   │   ├── home.page.ts
 │   │   └── product.page.ts
 │   ├── test-data/
+│   │   ├── api/
+│   │   │   └── catalog-api.data.ts
 │   │   ├── cart/
 │   │   │   ├── cart-management.data.ts
 │   │   │   └── cart-page.data.ts
@@ -42,6 +47,8 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
 │   ├── workflows/
 │   │   └── cart.workflow.ts
 │   └── tests/
+│       ├── api/
+│       │   └── catalog-api.spec.ts
 │       └── ui/
 │           ├── cart/
 │           │   ├── cart-empty-state.spec.ts
@@ -119,16 +126,24 @@ Cross-browser test automation for [Spellbound Supply](https://spellbound.lamprop
   - [x] Preserve independent scenarios, explicit assertions, and readable report steps
   - [x] Local cross-browser validation: 27 normal passes and 3 expected failures
   - [x] Pull-request CI verification
-- [ ] **Milestone 11 — Catalog search and query synchronization**
+- [x] **Milestone 11 — Catalog search and query synchronization**
   - [x] Shared header search and brand-link navigation actions
   - [x] Brand-link navigation from catalog to home
   - [x] Initial search validates URL query, header input, result count, and product identity
   - [x] Repeated-search regression verifies sidebar synchronization after the SUT fix for [issue #12](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/12)
   - [x] Catalog-specific test-data folder and independent search scenarios
   - [x] Local quality checks and cross-browser validation
-  - [ ] Pull-request CI verification and merge
+  - [x] Pull-request CI verification and merge
   - Scope narrowed to prioritize API testing; no-results and filter application/clearing coverage deferred to follow-up work
-- [ ] **Milestone 12 — API testing fundamentals** (next)
+- [ ] **Milestone 12 — API testing fundamentals**
+  - [x] Four independent HTTP scenarios in a dedicated Playwright API project
+  - [x] SKU lookup/pricing, no results, invalid status, and combined-filter coverage
+  - [x] Documented Postman collection with eight named tests, exported to Git
+  - [x] Postman app validation against local and deployed environments; local CLI execution verified
+  - [x] Combined Playwright suite: 40 normal passes and 3 expected Mandrake failures
+  - [x] Separate Postman CI job configured alongside existing Playwright execution
+  - [ ] Pull-request CI verification and merge
+  - [ ] Public Postman sharing and saved response examples
 - [ ] **Milestone 13 — Network failures and recovery** (planned)
 - [ ] **Milestone 14 — Accessibility checks and keyboard journeys** (planned)
 - [ ] **Milestone 15 — Performance fundamentals** (planned)
@@ -183,20 +198,70 @@ npm ci
 npx playwright install chromium firefox webkit
 ```
 
+## API coverage and execution
+
+The API tests exercise `GET /api/products` over HTTP without importing SUT
+implementation code. The SUT maintains the [catalog API contract](https://github.com/Lamprophonia/spellbound-supply-co/blob/main/docs/catalog-api-v1.md).
+QA work is tracked in [issue #14](https://github.com/Lamprophonia/spellbound-supply-playwright/issues/14).
+
+Playwright checks HTTP status, JSON content type, and selected response fields
+and business values. This is targeted contract coverage, not exhaustive JSON
+Schema validation. API tests run once in the `api` project; UI tests run in the
+three browser projects. Both are included in `npm test` and its HTML report.
+
+Run only API tests against the deployed demo:
+
+```shell
+npx playwright test --project=api
+```
+
+To target a running local API in PowerShell:
+
+```powershell
+$env:BASE_URL = 'http://127.0.0.1:8787'
+npx playwright test --project=api
+Remove-Item Env:BASE_URL
+```
+
+Postman provides an interactive, documented smoke collection covering the same
+four baseline scenarios. Import the collection and supply a `baseUrl` environment
+variable. Its CLI is pinned as a dev dependency and installed by `npm ci`.
+Run the repository export against the deployed demo:
+
+```shell
+npm run test:postman -- --env-var "baseUrl=https://spellbound.lamprophonia.com"
+```
+
+In Windows PowerShell, use `npm.cmd` for this command if npm drops the forwarded
+`--env-var` flag. To run locally, replace the URL with `http://127.0.0.1:8787`;
+the SUT server must be running separately. Postman's `baseUrl` and Playwright's
+`BASE_URL` are independent settings.
+
+Local-file CLI execution works without Postman login; cloud-publication warnings
+do not indicate test failures. Check the exit code. After editing requests in
+Postman, re-export to the same repository file and review the diff: this workflow
+does not automatically synchronize cloud edits with Git.
+
+CI runs Playwright and Postman in separate jobs after static quality succeeds.
+The existing required job named `Cross-browser tests` now includes Playwright API
+tests too; `Postman API tests` runs the committed collection against the deployed
+demo. Postman results are currently available in the job log.
+
 ## Commands
 
-| Command                | Purpose                                      |
-| ---------------------- | -------------------------------------------- |
-| `npm test`             | Run the full suite headlessly                |
-| `npm run test:headed`  | Run with visible browser windows             |
-| `npm run test:ui`      | Open Playwright UI Mode                      |
-| `npm run test:debug`   | Run with Playwright Inspector                |
-| `npm run test:report`  | Open the latest HTML report                  |
-| `npm run typecheck`    | Check TypeScript without emitting JavaScript |
-| `npm run lint`         | Run ESLint with warnings treated as failures |
-| `npm run lint:fix`     | Apply safe ESLint fixes                      |
-| `npm run format`       | Format supported files with Prettier         |
-| `npm run format:check` | Check formatting without changing files      |
-| `npm run quality`      | Run all static quality checks                |
+| Command                                             | Purpose                                      |
+| --------------------------------------------------- | -------------------------------------------- |
+| `npm test`                                          | Run Playwright UI and API tests              |
+| `npm run test:postman -- --env-var "baseUrl=<URL>"` | Run the exported Postman collection          |
+| `npm run test:headed`                               | Run with visible browser windows             |
+| `npm run test:ui`                                   | Open Playwright UI Mode                      |
+| `npm run test:debug`                                | Run with Playwright Inspector                |
+| `npm run test:report`                               | Open the latest HTML report                  |
+| `npm run typecheck`                                 | Check TypeScript without emitting JavaScript |
+| `npm run lint`                                      | Run ESLint with warnings treated as failures |
+| `npm run lint:fix`                                  | Apply safe ESLint fixes                      |
+| `npm run format`                                    | Format supported files with Prettier         |
+| `npm run format:check`                              | Check formatting without changing files      |
+| `npm run quality`                                   | Run all static quality checks                |
 
 The suite uses `https://spellbound.lamprophonia.com` by default. Set the `BASE_URL` environment variable to target another environment.
