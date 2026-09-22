@@ -135,15 +135,15 @@ UI and API test automation for [Spellbound Supply](https://spellbound.lamprophon
   - [x] Local quality checks and cross-browser validation
   - [x] Pull-request CI verification and merge
   - Scope narrowed to prioritize API testing; no-results and filter application/clearing coverage deferred to follow-up work
-- [ ] **Milestone 12 — API testing fundamentals**
+- [x] **Milestone 12 — API testing fundamentals**
   - [x] Four independent HTTP scenarios in a dedicated Playwright API project
   - [x] SKU lookup/pricing, no results, invalid status, and combined-filter coverage
   - [x] Documented Postman collection with eight named tests, exported to Git
   - [x] Postman app validation against local and deployed environments; local CLI execution verified
   - [x] Combined Playwright suite: 40 normal passes and 3 expected Mandrake failures
   - [x] Separate Postman CI job configured alongside existing Playwright execution
-  - [ ] Pull-request CI verification and merge
-  - [ ] Public Postman sharing and saved response examples
+  - [x] All three CI checks passed and implementation merged in [PR #15](https://github.com/Lamprophonia/spellbound-supply-playwright/pull/15)
+  - [x] Public Postman sharing and four saved response examples
 - [ ] **Milestone 13 — Network failures and recovery** (planned)
 - [ ] **Milestone 14 — Accessibility checks and keyboard journeys** (planned)
 - [ ] **Milestone 15 — Performance fundamentals** (planned)
@@ -223,9 +223,16 @@ npx playwright test --project=api
 Remove-Item Env:BASE_URL
 ```
 
-Postman provides an interactive, documented smoke collection covering the same
-four baseline scenarios. Import the collection and supply a `baseUrl` environment
-variable. Its CLI is pinned as a dev dependency and installed by `npm ci`.
+Explore the public [Spellbound Catalog API collection on Postman](https://www.postman.com/dept-of-catalog-and-commercial-interfaces/workspace/spellbound-catalog-api/collection/39686549-8924ee5a-9f5a-495d-b1fa-96b32f65b18d),
+including request descriptions, eight named tests, and four saved response examples.
+The examples document successful lookup, no matches, invalid status, and combined
+filters; they are response snapshots, not live test results.
+
+Postman covers the same four baseline scenarios as the Playwright API tests.
+Import or fork the collection and supply a `baseUrl` environment variable set to
+`https://spellbound.lamprophonia.com` for the deployed demo, or
+`http://127.0.0.1:8787` for a running local API.
+Its CLI is pinned as a dev dependency and installed by `npm ci`.
 Run the repository export against the deployed demo:
 
 ```shell

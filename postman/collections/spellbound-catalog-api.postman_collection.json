@@ -36,7 +36,77 @@
         },
         "description": "## Purpose\n\nFind Common Healing Potion by its SKU using the catalog search endpoint.\n\n## Request\n\nGET {{baseUrl}}/api/products?q=SSC-POT-0001\n\nThe `q` parameter searches the catalog. Because `status` is omitted,  \nthe API defaults to canonical products.\n\n## Expected response\n\n- HTTP 200.\n    \n- Schema version 1.\n    \n- Exactly one product: Common Healing Potion, SKU SSC-POT-0001.\n    \n- Price: 5 Copper per ounce.\n    \n- `total` equals 1 and matches the number of returned products.\n    \n\n## Environment\n\nSelect Spellbound Local to run against the local API."
       },
-      "response": []
+      "response": [
+        {
+          "name": "200 — Common Healing Potion found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?q=SSC-POT-0001",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "SSC-POT-0001"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 22 Sep 2026 14:00:21 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=5%2B%2FSx%2F%2FxglUQDSKa4NHNFjL9zHjrr4GdhfVYKLiwjvmtpAYK8xlz3QEg9CkuRdPHk2XLGDOy0NEvnY9B9Qs2EG81FmcILWPqG2i9lkcnhWcdGIilln5OrP01vs4tS%2FGjPvHbGHVDySNtJZJWkTg%3D\"}]}"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a3f1d5e0d84ecdd7-MIA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"schemaVersion\": 1,\n  \"products\": [\n    {\n      \"sku\": \"SSC-POT-0001\",\n      \"slug\": \"common-healing-potion\",\n      \"name\": \"Common Healing Potion\",\n      \"departmentId\": \"potions-elixirs\",\n      \"contentStatus\": \"canonical\",\n      \"shortDescription\": \"A standardized vitality potion for minor injuries, ailments, or common sicknesses.\",\n      \"price\": {\n        \"amount\": 5,\n        \"denomination\": \"Copper\",\n        \"unit\": \"ounce\"\n      },\n      \"image\": {\n        \"src\": \"/products/placeholders/potions-elixirs-v1.jpg\",\n        \"alt\": \"Representative amber potion bottle sealed with burgundy wax on an apothecary table\",\n        \"status\": \"placeholder\"\n      },\n      \"facts\": {\n        \"category\": \"Vitality potion\",\n        \"volatility\": \"None\",\n        \"supplier\": \"Bramblewick Bottling & Alchemical Works\",\n        \"recommendedUsage\": \"Consume all at once\",\n        \"dosage\": \"1 oz per 50 lbs\",\n        \"onset\": \"Immediate\",\n        \"primaryEffects\": \"Heal minor injuries, ailments, or common sicknesses\",\n        \"notRecommendedFor\": \"Major wounds, missing limbs, curses, magical ailments, or major infections\",\n        \"secondaryEffects\": \"None\",\n        \"sideEffects\": \"May include randomly colored urine for several days\",\n        \"minimumUserAge\": \"None\",\n        \"minimumUserWeight\": \"50 lbs\"\n      },\n      \"handling\": {\n        \"title\": \"Bottled preparation handling\",\n        \"notes\": [\n          \"Bottle securely stoppered and wax sealed\",\n          \"Cushioned upright in a rigid shipping container\",\n          \"Tamper seal inspected before dispatch\",\n          \"Standard courier permitted unless otherwise marked\"\n        ],\n        \"disclaimer\": \"Inspect the seal and label before use. Do not consume merchandise damaged in transit.\"\n      }\n    }\n  ],\n  \"total\": 1\n}"
+        }
+      ]
     },
     {
       "name": "Search with no matching products",
@@ -67,7 +137,73 @@
         },
         "description": "Verify that a valid search with no matching products returns HTTP 200,  \nan empty products array, and total 0—not a validation error."
       },
-      "response": []
+      "response": [
+        {
+          "name": "200 — No matching products",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?q=qa-no-match-7f93c2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "qa-no-match-7f93c2"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 22 Sep 2026 14:01:05 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "43"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=QQJz9XzseyW%2Fkvv1NsEVek%2Fy%2BFLLCeTJAhizdKqYt8kW5PmbWYG1GNZKd0y9TeC0t5ofA6YEVKVilFkRUMX3u4l%2Bdbi%2FxXT%2FN10KkKF01dFHOzKeIlgJXQHxO7o%2F%2BO%2Bm97gQ80fOMn4jNU1VbQ0%3D\"}]}"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a3f1d6f4491acdd7-MIA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"schemaVersion\": 1,\n  \"products\": [],\n  \"total\": 0\n}"
+        }
+      ]
     },
     {
       "name": "Reject an invalid status filter",
@@ -98,7 +234,73 @@
         },
         "description": "Verify that an unsupported status value returns HTTP 400 and identifies  \nstatus as the invalid parameter using a stable error code."
       },
-      "response": []
+      "response": [
+        {
+          "name": "400 — Invalid status parameter",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?status=invalid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "invalid"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 22 Sep 2026 14:01:38 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "110"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=O3NiUbhY0guCKCAsPTl236QlrcRmcFVmin1P8MZv4Z1cnp3EhQU%2Fe4t9xMSmsig3rwW2byAFrp3IBoELNPT2LBXxsPEUosixnLRcVtT55xkOLhHPkW0xZPYXh%2B5Oyu6DCWhhEtAWKQoq22myD7Y%3D\"}]}"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a3f1d7c1be50cdd7-MIA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"error\": {\n    \"code\": \"INVALID_QUERY_PARAMETER\",\n    \"parameter\": \"status\",\n    \"message\": \"Invalid query parameter: status.\"\n  }\n}"
+        }
+      ]
     },
     {
       "name": "Exclude a matching product from a different department",
@@ -133,7 +335,77 @@
         },
         "description": "Verify that search and department filters combine using AND.  \nCommon Healing Potion matches the SKU query but not the selected  \ningredients department, so the response must contain no products."
       },
-      "response": []
+      "response": [
+        {
+          "name": "200 — No products match both filters",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?q=SSC-POT-0001&departmentId=ingredients-reagents",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "SSC-POT-0001"
+                },
+                {
+                  "key": "departmentId",
+                  "value": "ingredients-reagents"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 22 Sep 2026 14:01:52 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "43"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=GP%2F1wpa53GHnJrqToO2hRHiIEt51qwJMtm3uPXiH%2Fn09n%2BekBIW472CsA%2F%2FYVmjmoLkKE%2FTaRO9HeaSQGW5soMZjOHgVgRZUv6kk0KzRcoaEmJYGpindT%2BFc0WiV63Vcag3FNYhdfaIhq4LA8TE%3D\"}]}"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a3f1d8195b0fcdd7-MIA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"schemaVersion\": 1,\n  \"products\": [],\n  \"total\": 0\n}"
+        }
+      ]
     }
   ]
 }
