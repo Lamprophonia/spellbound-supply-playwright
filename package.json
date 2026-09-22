@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "quality": "npm run typecheck && npm run lint && npm run format:check"
+    "quality": "npm run typecheck && npm run lint && npm run format:check",
+    "test:postman": "postman collection run postman/collections/spellbound-catalog-api.postman_collection.json"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -24,6 +25,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.11.0",
     "globals": "^17.11.0",
+    "postman-cli": "1.60.0",
     "prettier": "3.9.6",
     "typescript": "~6.0.0",
     "typescript-eslint": "^8.68.0"
